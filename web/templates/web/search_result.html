@@ -1,0 +1,48 @@
+{% extends 'layout/basic.html' %}
+
+{% load static %}
+
+{% block title %} 首页 {% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'web/plugin/bootstrap/css/bootstrap.css' %}">
+<link rel="stylesheet" href="{% static 'web/css/carousel.css' %}">
+
+{% endblock %} 
+ 
+{% block content %}
+<div class="container">
+{% if error_msg %}
+    {{ error_msg }}
+{% else %} 
+    <h1>信息展示<small>点击编码可以查询备件</small></h1>
+    <table class="table table-hover">
+    <thead>
+    <tr>
+    <th>模具编号</th>
+    <th>零件号</th>
+    <th>工序号</th>
+    <th>工序名称</th>
+    <th>定置</th>
+    </tr>
+    </thead>
+    {% for sr in search_result %}
+        <tr>
+        
+        <td><a target="_blank"href="{% url 'r_parts' tool_id=sr.id %}">{{ sr.tool_no }}</a></td>
+        <td>{{ sr.part_no }}</td>
+        <td>{{ sr.op }}</td>
+        <td>{{ sr.name }}</td>
+        <td>{{sr.location}}</td>
+    </tr>
+                                
+
+                                
+                            
+        
+    
+        
+    {% endfor %}</table>
+{% endif %}
+</div>
+{% endblock %} 

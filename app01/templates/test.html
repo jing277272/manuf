@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>用户查询页面(nxy)</title>
+</head>
+<body>
+ 
+<form align="center" action="/findresult/" method="get">
+查询编号： <input type="text" id="id" name="id"> <br><br>
+	
+	<button  type="button" id='find'>查询</button>
+	&nbsp; &nbsp; &nbsp; &nbsp; 
+	<button  type="button" id='chongzhi' onclick="document.getElementById('id').value=''">重置</button>
+</br></br>
+ 
+</form>
+ 
+<table class="gridtable" align="center" id="pstable" border="1">
+<thead>
+            <tr>
+                <th align=center width=100>编号</th>
+                <th align=center width=200>姓名</th>
+				<th align=center width=200>处理</th>
+            </tr>
+</thead>
+ 
+<tbody>
+</tbody>
+ 
+</table>
+ 
+ 
+<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$("#find").click(function(){
+		var id = $("#id").val();
+		
+		
+		
+		$.get("/findresult/",{'id':id}, function(ret){
+			
+			var obj = eval(ret);
+			
+			var tbody=$('<tbody></tbody>');
+			
+			
+			for(var i=0;i<obj.length;i++){
+				var tr=$('<tr></tr>');
+				tr.append('<td>'+ obj[i]['id'] + '</td>' + '<td>'+ obj[i]['name'] + '</td>' +'<td><a href="/delete?id=' + obj[i]['id'] + '" >删除数据</a></td>' );
+				tbody.append(tr);
+			}
+			
+			$('#pstable tbody').replaceWith(tbody);
+        })
+      });
+    });
+</script>
+ 
+</body>
+</html>
+ 
+ 
+ 
+ 
+ 
+<style type="text/css">
+  table.gridtable {
+      font-family: verdana,arial,sans-serif;
+      font-size:11px;
+      color:#333333;
+      border-width: 1px;
+      border-color: #666666;
+      border-collapse: collapse;
+ }
+ table.gridtable th {
+     border-width: 1px;
+     padding: 8px;
+     border-style: solid;
+     border-color: #666666;
+     background-color: #dedede;
+ }
+ table.gridtable td {
+     border-width: 1px;
+     padding: 8px;
+     border-style: solid;
+     border-color: #666666;
+     background-color: #ffffff;
+ }
+ </style>

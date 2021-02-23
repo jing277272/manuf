@@ -1,0 +1,83 @@
+{% load  static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}
+    {% endblock %}
+    </title>
+<link rel="stylesheet" href="{% static 'web/plugin/bootstrap/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'web/plugin/font-awesome/css/font-awesome.min.css' %}">
+<link rel="shortcut icon" href="{%static "web/img/favicon.ico" %}" />
+
+{% block css %}{% endblock %}
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="" href="http://www.xfsunrise.com"><img class="container-fluid" src="{% static 'web/img/logo0.png' %}" style="width: 190px;padding-top: 5px;padding-bottom: 5px;"></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+      
+      <li>
+      <a href="{% url 'index' %}">首页</a></li>
+        <li><a href="{% url 'mould' %}">模具管理</a></li>
+
+        <li><a href="#">参数管理</a></li>
+        <li><a href="#">新品调试</a></li>
+        <li><a href="project/list">工作协作</a></li>
+
+
+          </ul>
+        </li>
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="mailto:xfds@xfsunrise.com">联系我们</a></li>
+            {% if request.web.user %}
+                    <li class="dropdown">
+                    <div> 
+                    <img src="{{ request.web.user.avatar }}" class="img-rounded" style="height: 48px; width: 48px;">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false"   >{{ request.web.user.nickname }}<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li role="separator" class="divider"></li>
+                            <li><a href="account/changepwd">修改密码</a></li>
+                            
+                            <li><a href="project/list">管理中心</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{% url 'logout' %}">用户注销</a></li>
+                        </ul>
+                    </li>
+                    </div>
+                {% else %}
+                    <li><a href="{% url 'login' %}">登 陆</a></li>
+                    <li><a href="{% url 'register' %}">注 册</a></li>
+                {% endif %}
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+{% block content %}
+{% endblock  %}
+
+
+<script src="{% static 'web/js/jquery-3.5.1.slim.min.js' %}"></script>
+<script src="{% static 'web/plugin/bootstrap/js/bootstrap.min.js' %}"></script>
+{% block js %}{% endblock %}
+</body>
+</html>
