@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from helpers import get_page_list, ajax_required
 import rander as rander
-from mould.models import Item, Mould
+from mould.models import Mould
 
 
 # 创建模具档案
@@ -23,9 +23,11 @@ def resume_list(request, pagenum):
 
 
 # 模具档案
-def resume(request):
-    pass
-
-
+def resume(request, tool_no):
+    if request.method == 'GET':
+        id = tool_no
+        mould = Mould.objects.filter(tool_no = tool_no)
+        print(mould)
+    return rander(request, 'mould/resume.html', context=mould)
 def ResumeEdit(request):
     pass

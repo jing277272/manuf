@@ -13,7 +13,6 @@ urlpatterns = [
     url(r'^account/changepwd', account.change_pwd, name='changepwd'),
     url(r'^logout/', account.logout, name='logout'),
     url(r'^image/code/', account.image_code, name='image_code'),
-    url(r'mould/cread', resume, name='resume'),
     path('', home.index, name='index'),  # 默认首页
 
     # 项目列表

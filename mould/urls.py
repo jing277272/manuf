@@ -2,7 +2,7 @@ from django.conf.urls import url, include
 from mould.views import resume, mould
 urlpatterns = [
     url(r'^listmould', mould.listmoulds, name='mould'),
-    url(r'^resume/$', resume.resume_list, name='resume'),
+    url(r'^resume/(?P<tool_no>\d+)/$',resume.resume,name='resume'),
     
     url(r'^resume/(\d*)$', resume.resume_list),
     url(r'^scearch1/$',mould.scearch1,name='scearch1'),

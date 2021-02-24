@@ -3,7 +3,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from helpers import get_page_list, ajax_required
 from utils.pagination import Pagination
 from django.shortcuts import render
-from mould.models import Item, Mould ,RepairParts
+from mould.models import Mould ,RepairParts
 from django.db.models import Q
 
 def scearch1(request):
@@ -26,6 +26,7 @@ def scearch1(request):
         return render(request,'web/search_result.html',{'search_result':search_result}) 
       
     error_msg = "出错了！没有找到查询结果，请输入正确的信息"
+    print(locals())
     return render(request,'web/search_result.html',locals()) 
 
 
@@ -104,12 +105,3 @@ def listmoulds(request):
     qs = Mould.objects.values()
     print (qs)
     return render(request, 'mould/home.html')
-
-
-# 模具档案
-def resume(request):
-    pass
-
-
-def ResumeEdit(request):
-    pass
