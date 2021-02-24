@@ -25,9 +25,9 @@ def resume_list(request, pagenum):
 # 模具档案
 def resume(request, tool_no):
     if request.method == 'GET':
-        id = tool_no
-        mould = Mould.objects.filter(tool_no = tool_no)
+        dsm = tool_no
+        mould = Mould.objects.filter(tool_no = dsm)
         print(mould)
-    return rander(request, 'mould/resume.html', context=mould)
+    return rander(request, 'mould/resume.html', {'mould':mould})
 def ResumeEdit(request):
     pass
