@@ -1,4 +1,5 @@
-[Thu Feb 25 11:29:32.481363 2021] [mpm_winnt:notice] [pid 6412:tid 916] AH00455: Apache/2.4.6 (Win32) PHP/5.4.17 configured -- resuming normal operations
-[Thu Feb 25 11:29:32.481363 2021] [mpm_winnt:notice] [pid 6412:tid 916] AH00456: Apache Lounge VC10 Server built: Jul 16 2013 11:15:41
-[Thu Feb 25 11:29:32.481363 2021] [core:notice] [pid 6412:tid 916] AH00094: Command line: 'E:\\VSCodeProjects\\manuf\\USBWebserver-v8.6/apache2/bin/httpd_usbwv8.exe -d E:/VSCodeProjects/manuf/USBWebserver-v8.6/apache2'
-[Thu Feb 25 11:29:32.481363 2021] [mpm_winnt:notice] [pid 6412:tid 916] AH00418: Parent: Created child process 11036
+[Thu Feb 25 21:40:17.738191 2021] [mpm_winnt:notice] [pid 4708:tid 728] AH00455: Apache/2.4.6 (Win32) PHP/5.4.17 configured -- resuming normal operations
+[Thu Feb 25 21:40:17.738191 2021] [mpm_winnt:notice] [pid 4708:tid 728] AH00456: Apache Lounge VC10 Server built: Jul 16 2013 11:15:41
+[Thu Feb 25 21:40:17.738191 2021] [core:notice] [pid 4708:tid 728] AH00094: Command line: 'D:\\VSProjects\\manuf\\USBWebserver-v8.6/apache2/bin/httpd_usbwv8.exe -d D:/VSProjects/manuf/USBWebserver-v8.6/apache2'
+[Thu Feb 25 21:40:17.742052 2021] [mpm_winnt:notice] [pid 4708:tid 728] AH00418: Parent: Created child process 252
+[Thu Feb 25 21:40:18.671697 2021] [mpm_winnt:notice] [pid 252:tid 784] AH00354: Child: Starting 64 worker threads.
