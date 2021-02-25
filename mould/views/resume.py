@@ -6,7 +6,6 @@ from mould.models import Mould
 
 
 # 创建模具档案
-
 def resume_list(request, pagenum):
     resumes = Mould.objects.all().order_by('-modify_time')
     paginator = Paginator(resumes, 20)
@@ -28,6 +27,6 @@ def resume(request, tool_no):
         dsm = tool_no
         mould = Mould.objects.filter(tool_no = dsm)
         print(mould)
-    return rander(request, 'mould/resume.html', {'mould':mould})
+    return rander(request, 'mould/resume.html', {'tool_no':tool_no})
 def ResumeEdit(request):
     pass
