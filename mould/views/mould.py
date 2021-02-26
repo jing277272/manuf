@@ -17,17 +17,17 @@ def scearch1(request):
         print("A1")
         search_result = Mould.objects.filter(tool_no__contains=A1)
         print(search_result)
-        return render(request,'web/search_result.html',{'search_result':search_result}) 
+        return render(request,'mould/search_result.html',{'search_result':search_result}) 
         
     if A2:
         print("A2")
         search_result = Mould.objects.filter(part_no__contains=A2)
         print(search_result)
-        return render(request,'web/search_result.html',{'search_result':search_result}) 
+        return render(request,'mould/search_result.html',{'search_result':search_result}) 
       
     error_msg = "出错了！没有找到查询结果，请输入正确的信息"
     print(locals())
-    return render(request,'web/search_result.html',locals()) 
+    return render(request,'mould/search_result.html',locals()) 
 
 
 
@@ -59,8 +59,8 @@ def r_parts(request, tool_id):
         return render(request, 'mould/repair.html', context)
 
 
-    error_msg = "出错了！没有模具在库信息！"
-    return render(request,'web/search_result.html',locals()) 
+    error_msg = "出错了！没有备件在库信息！"
+    return render(request,'mould/search_result.html',locals()) 
 
 #form = IssuesModelForm(request, data=request.POST)
 '''if form.is_valid():
@@ -87,16 +87,16 @@ def scearch3(request):
     if not (A1 or A2):
         search_result =  Mould.objects.filter(Q(part_no__contains=A2)).first()
         print(search_result)
-        return render(request,'web/search_result.html',locals())
+        return render(request,'mould/search_result.html',locals())
     elif not (B1 or B2):
-        S1=  models.Mould.objects.filter(Q(tool_No=B1) | Q(part_No=B2)).first()
+        S1=  models.Mould.objects.filter(Q(tool_no=B1) | Q(part_no=B2)).first()
         search_result =  models.RepairParts.objects.filter(Q(tool=S1)).first()
-        return render(request,'web/search_result.html',locals())
+        return render(request,'mould/search_result.html',locals())
     elif not (Parts_D or Parts_L or Parts_p or Parts_W):
         pass
     else:
         error_msg = "您需要输入想要搜索的内容"
-        return render(request,'web/search_result.html',locals())
+        return render(request,'mould/search_result.html',locals())
 
 
 # 创建模具档案

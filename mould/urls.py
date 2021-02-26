@@ -5,10 +5,10 @@ urlpatterns = [
     url(r'^resume/(?P<tool_no>\d+)/$',resume.resume,name='resume'),
     
     url(r'^resume/(\d*)$', resume.resume_list),
-    url(r'^scearch1/$',mould.scearch1,name='scearch1'),
-    url(r'^scearch1/r/(?P<tool_id>\d+)/$',mould.r_parts,name='r_parts'),
+    url(r'^scearch/$',mould.scearch1,name='scearch1'),
+    url(r'^repairparts/(?P<tool_id>\d+)/$',mould.r_parts,name='r_parts'),
     
-    url(r'^scearch3/$',mould.scearch3,name='scearch3'),
+    url(r'^scearch/$',mould.scearch3,name='scearch3'),
 
     # 路由分发
 
