@@ -1,0 +1,16 @@
+.venv/
+USBWebserver-v8.6/
+__pycache__/
+
+#pycharm
+.idea/
+.DS_Store
+
+
+#Django stuff:
+local_settings.py
+
+
+#database migrations
+*/migrations/*.py
+!*/migrations/__init__.py
