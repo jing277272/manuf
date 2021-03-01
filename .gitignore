@@ -1,6 +1,6 @@
 .venv/
 USBWebserver-v8.6/
-__pycache__/
+__pycache__
 */__pycache__/*.pyc
 */__pycache__
 #pycharm
