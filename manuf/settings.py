@@ -135,7 +135,11 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+#项目中存储上传文件的根目录[暂时配置]，
+MEDIA_ROOT = os.path.join(BASE_DIR,"uploads")
 
+#访问上传文件的url地址前缀
+MEDIA_URL ="/media/"
 
 # 自己的短信模板相关配置
 SMS_APP_ID = 00000000  # 应用ID

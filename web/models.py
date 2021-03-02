@@ -258,3 +258,18 @@ class ProjectInvite(models.Model):
     create_datetime = models.DateTimeField(verbose_name='创建时间', auto_now_add=True)
     creator = models.ForeignKey(verbose_name='创建者', to='UserInfo', on_delete=models.CASCADE,
                                 related_name='create_invite')
+
+
+#轮播图
+class Banner(models.Model):
+    title = models.CharField('标题', max_length=50)
+    cover = models.ImageField('轮播图', upload_to='static/img/banner')
+    link_url = models.URLField('图片链接', max_length=100)
+    idx = models.IntegerField('索引')
+    is_active = models.BooleanField('是否是active', default=False)
+
+    def __str__(self):
+        return self.title
+    class Meta:
+        verbose_name = '轮播图'
+        verbose_name_plural = '轮播图'
