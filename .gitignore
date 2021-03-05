@@ -1,5 +1,6 @@
 .venv/
 USBWebserver-v8.6/
+<<<<<<< HEAD
 __pycache__/
 #VsCode
 .vscode/
@@ -9,6 +10,15 @@ __pycache__/
 .idea/
 .DS_Store
 
+=======
+__pycache__
+*/__pycache__/*.pyc
+*/__pycache__
+#pycharm
+.idea/
+.DS_Store
+.vscode/
+>>>>>>> 50ddc5f5d83f5af400468011d756a3919dd1810d
 
 #Django stuff:
 local_settings.py
