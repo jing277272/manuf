@@ -23,7 +23,7 @@ def setting_delete(request, project_id):
 
     # 删除桶里面所有文件
     # 删除桶
-    delete_bucket(request.web.project.bucket, request.web.project.region)
+    #delete_bucket(request.web.project.bucket, request.web.project.region)
 
     # 删除项目
     models.Project.objects.filter(id=request.web.project.id).delete()
