@@ -30,7 +30,7 @@ def dashboard(request, project_id):
         'join_user': join_user,
         'top_ten': top_ten
     }
-
+    print(join_user)
     return render(request, 'web/dashboard.html', context)
 
 
