@@ -9,8 +9,8 @@
 {% endblock %} {% block content %}
 <div class="container">
   {% if error_msg %} {{ error_msg }} {% else %}
-  <h1>信息展示</h1>
-  <table class="table table-hover">
+  <h2>信息展示</h2>
+  <table class="table table-striped">
     <thead>
       <tr>
         <th>模具编号</th>
@@ -38,7 +38,12 @@
     </tr>
 
     {% endfor %}
+
+
   </table>
+  <div><p><mark>模具档案及备件</mark>信息须<strong><a target="_blank" href="{% url 'login'  %}"
+          >登录</a></strong>方可查看！</p>
+</div >
   {% endif %}
 </div>
 {% endblock %}

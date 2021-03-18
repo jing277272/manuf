@@ -15,35 +15,30 @@
 {% if error_msg %}
     {{ error_msg }}
 {% else %} 
-    <h1>信息展示</h1>
-    <table class="table table-hover">
+    <h3>信息展示</h3>
+    <table class="table table-striped">
     <thead>
     <tr>
-    <th>备件编号</th>
+    <th>编号</th>
     <th>备件名称</th>
     <th>图示</th>
-    <th>在库数量</th>
-    <th>定置</th>
+    <th>数量</th>
+    <th>领用</th>
     </tr>
     </thead>
     {% for sr in search_result %}
         <tr>
         <td>{{ sr.id }}</a></td>
         <td>{{ mould.name }}</td>
-        <td><a target="_blank"href="{% url 'r_parts' tool_id=sr.id %}"><img src="{{ sr.imgs }}" class="img" style="height: 40px;"></td>
+        <td><a target="_blank"href="{{ sr.imgs }}"><img src="{{ sr.imgs }}" class="img" style="height: 40px;"></td></a>
         <td>{{ sr.quantity }}</td>
-        <td> {% if request.web.user %}
-                   {{sr.local}}
-                {% else %}
-                    <li><a href="{% url 'login' %}">登 陆</a></li>
-                    <li><a href="{% url 'register' %}">注 册</a></li>
-
-                {% endif %}</td>
+        <td> <button type="button" class="btn btn-success">申领</button></td>
 
 
     </tr>
 
     {% endfor %}</table>
+    <a class="btn btn-success btn-sm" data-toggle="modal" data-target="#request">备件申报</a>
 {% endif %}
 </div>
 {% endblock %} 

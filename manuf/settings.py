@@ -171,9 +171,10 @@ WHITE_REGEX_URL_LIST = [
     '/image/code/',
     '/index/',
     '/',
+    '/image/repair/',
 
     '/scearch/',
-    '/repairparts/',
+
 
     '/xadmin/',    
     'xadmin/xadmin/bookmark/add/',
