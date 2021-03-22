@@ -35,7 +35,7 @@
         <td>{{ mould.name }}</td>
         <td><a target="_blank"href="{{ sr.imgs }}"><img src="{{ sr.imgs }}" class="img" style="height: 40px;"></td></a>
         <td>{{ sr.quantity }}</td>
-        <td> <button type="button" class="btn btn-success">申领</button></td>
+        <td> <button type="button" class="btn btn-success" data-target="#use">申领</button></td>
 
 
     </tr>
@@ -45,3 +45,13 @@
 {% endif %}
 </div>
 {% endblock %} 
+
+{% block js %}
+<script>
+        $(function () {
+            bindBootStrapShowEvent();
+        });
+
+</script>
+
+{% endblock %}
