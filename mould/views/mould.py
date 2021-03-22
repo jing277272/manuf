@@ -65,7 +65,7 @@ def r_parts(request, tool_id):
 
 
     error_msg = "出错了！没有备件在库信息！"
-    return render(request,'mould/search_result.html',locals()) 
+    return render(request,'mould/repair.html',locals()) 
 
 #form = IssuesModelForm(request, data=request.POST)
 '''if form.is_valid():
