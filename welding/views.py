@@ -5,6 +5,7 @@ import time
 from django.http import JsonResponse
 import collections
 import rander as rander
+from welding.models import Parameters,Recipe
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from helpers import get_page_list, ajax_required
 from utils.pagination import Pagination

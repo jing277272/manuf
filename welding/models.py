@@ -34,8 +34,14 @@ class Recipe(models.Model):
     part_no = models.CharField(max_length=20, blank=True, null=True, verbose_name="零件号")
     op = models.CharField(max_length=20, blank=True,null=True, verbose_name="工序")
     name = models.CharField(max_length=20, blank=True,null=True, verbose_name="名称")
-    equipment = models.CharField(max_length=20, blank=True, null=True, verbose_name="设备")
-    
+    equipment = models.ForeignKey(to='Parameters',related_name = 'eq',on_delete=models.CASCADE, verbose_name="设备")
+    m1 = models.CharField(max_length=20, blank=True, null=True, verbose_name="材料1")
+    t1= models.CharField(max_length=20, blank=True, null=True, verbose_name="厚度1")
+    m2= models.CharField(max_length=20, blank=True, null=True, verbose_name="材料2")
+    t2= models.CharField(max_length=20, blank=True, null=True, verbose_name="厚度2")
+    m3= models.CharField(max_length=20, blank=True, null=True, verbose_name="材料3")
+    t3= models.CharField(max_length=20, blank=True, null=True, verbose_name="厚度3")
+
     diameter = models.CharField(max_length=20, blank=True, null=True, verbose_name="修磨直径（mm)")
     frequency = models.CharField(max_length=20, blank=True, null=True, verbose_name="修磨频次")
     modify = models.ForeignKey(blank=False, null=True, default='1', to='web.UserInfo', on_delete=models.CASCADE,verbose_name="修改者")
