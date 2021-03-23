@@ -1,0 +1,57 @@
+{% extends 'layout/basic.html' %}
+
+{% load static %}
+
+{% block title %} 首页 {% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'web/plugin/bootstrap/css/bootstrap.css' %}">
+<link rel="stylesheet" href="{% static 'web/css/carousel.css' %}">
+
+{% endblock %} 
+ 
+{% block content %}
+<div class="container">
+{% if error_msg %}
+ {{ error_msg }}
+<a class="btn btn-success btn-sm" data-toggle="modal" data-target="#request">备件申报</a>
+   
+    
+{% else %} 
+    <h3>信息展示</h3>
+    <table class="table table-striped">
+    <thead>
+    <tr>
+    <th>编号</th>
+    <th>备件名称</th>
+    <th>图示</th>
+    <th>数量</th>
+    <th>领用</th>
+    </tr>
+    </thead>
+    {% for sr in search_result %}
+        <tr>
+        <td>{{ sr.id }}</a></td>
+        <td>{{ mould.name }}</td>
+        <td><a target="_blank"href="{{ sr.imgs }}"><img src="{{ sr.imgs }}" class="img" style="height: 40px;"></td></a>
+        <td>{{ sr.quantity }}</td>
+        <td> <button type="button" class="btn btn-success" data-target="#use">申领</button></td>
+
+
+    </tr>
+
+    {% endfor %}</table>
+    <a class="btn btn-success btn-sm" data-toggle="modal" data-target="#request">备件申报</a>
+{% endif %}
+</div>
+{% endblock %} 
+
+{% block js %}
+<script>
+        $(function () {
+            bindBootStrapShowEvent();
+        });
+
+</script>
+
+{% endblock %}

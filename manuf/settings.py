@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'app01.apps.App01Config',
     'web.apps.WebConfig',
     'mould.apps.MouldConfig',
+    'welding.apps.WeldingConfig',
 
 
 ]

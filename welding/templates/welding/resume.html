@@ -1,0 +1,37 @@
+{% extends 'layout/basic.html' %}
+{% load static %}
+{% load thumbnail %}
+
+{% block title %} 模具档案 {% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'web/css/account.css' %}">
+    <style>
+        .error-msg {
+            color: red;
+            position: absolute;
+            font-size: 13px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+ <div id="toolbox">
+  <h1>模具档案</h1>
+  <ul id="resumelist">
+    {# 遍历档案 #}
+    {% for page in context %}
+      {# 显示博文标题 #}
+      <li>
+        <a href="#" rel="external nofollow" ><h3>{{ resume.tool_no }}</h3></a>
+      </li>
+    {% endfor %}
+  
+    </ul>
+  </nav>
+</div>
+{% endblock %}
+
+
+ {% block js %}
+
+{% endblock %}

@@ -11,7 +11,7 @@ from django.shortcuts import render
 from mould.models import Mould ,RepairParts
 from django.db.models import Q
 
-def scearch1(request):
+def search1(request):
     
     if request.method == 'POST':
         return render(request, 'web/index.html')
