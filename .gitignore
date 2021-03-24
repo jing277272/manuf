@@ -1,12 +1,12 @@
 #虚拟环境，临时文件
 .venv/
-*/__pycache__
+*/__pycache__/
 */__pycache__/*.pyc
 __pycache__/
 */migrations/__pycache__
 */forms/__pycache__/
 */middleware/__pycache__/
-
+*.pyc
 
 #VsCode
 .vscode/
