@@ -4,12 +4,6 @@
 */__pycache__/*.pyc
 __pycache__/
 */migrations/__pycache__
-web/migrations/__pycache__/__init__.cpython-37.pyc
-web/migrations/__pycache__/0001_initial.cpython-37.pyc
-web/migrations/__pycache__/0002_auto_20210323_2058.cpython-37.pyc
-web/migrations/__pycache__/0003_auto_20210323_2130.cpython-37.pyc
-web/migrations/__pycache__/0004_auto_20210323_2144.cpython-37.pyc
-web/migrations/__pycache__/0005_auto_20210323_2156.cpython-37.pyc
 */forms/__pycache__/
 */middleware/__pycache__/
 
