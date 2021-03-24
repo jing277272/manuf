@@ -20,7 +20,7 @@ class Parameters(models.Model):
     heat3= models.CharField(max_length=3, blank=True, null=True, verbose_name="焊接3")
     gauge= models.CharField(max_length=3, blank=True, null=True, verbose_name="表压力")
     pressure= models.CharField(max_length=3, blank=True, null=True, verbose_name="加压力")
-
+    part=models.ManyToManyField(to="Recipe")
 											
     
 
@@ -34,7 +34,7 @@ class Recipe(models.Model):
     part_no = models.CharField(max_length=20, blank=True, null=True, verbose_name="零件号")
     op = models.CharField(max_length=20, blank=True,null=True, verbose_name="工序")
     name = models.CharField(max_length=20, blank=True,null=True, verbose_name="名称")
-    equipment = models.ForeignKey(to='Parameters',related_name = 'eq',on_delete=models.CASCADE, verbose_name="设备")
+    sc = models.ManyToManyField(to='Parameters',verbose_name="参数")
     m1 = models.CharField(max_length=20, blank=True, null=True, verbose_name="材料1")
     t1= models.CharField(max_length=20, blank=True, null=True, verbose_name="厚度1")
     m2= models.CharField(max_length=20, blank=True, null=True, verbose_name="材料2")
@@ -48,7 +48,7 @@ class Recipe(models.Model):
     modify_time = models.DateTimeField(auto_now_add=True, verbose_name="修改时间")
 
     def __str__(self):
-        return "%s-%s" % (self.part_no, self.tool_no)
+        return "%s-%s" % (self.part_no, self.op)
 
     class Meta:
         db_table = "w_recipe"
