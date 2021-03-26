@@ -35,27 +35,27 @@
         <td>{{ mould.name }}</td>
         <td><a target="_blank"href="{{ sr.imgs }}"><img src="{{ sr.imgs }}" class="img" style="height: 40px;"></td></a>
         <td>{{ sr.quantity }}</td>
-        <td> <button type="button" class="btn btn-success" data-target="#use{{ sr.id }}">申领</button></td>
+        <td> <button type="button" class="btn btn-success" data-toggle="modal" data-target="#use{{sr.id}}">申领</button></td>
+
+
+
+    </tr>
 <!-- Modal -->
-<div class="modal fade" id="use{{ sr.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="use{{sr.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">备件申请</h4>
       </div>
       <div class="modal-body">
-        别急，该功能正在开发^_^!
+    模态框{{sr.id}}号
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="button" class="btn btn-primary">提交</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
-</div>        
-    </tr>
-
+</div>
     {% endfor %}</table>
     <!-- Button trigger modal -->
     <a class="btn btn-success btn-sm" data-toggle="modal" data-target="#request">备件申报</a>
@@ -84,6 +84,9 @@
     </div>
   </div>
 </div>
+
+
+
 
 {% endblock %} 
 
