@@ -74,7 +74,7 @@ def search1(request):
 
 def r_parts(request, tool_id):
     # 分页获取数据
-    queryset = RepairParts.objects.filter(tool_id=tool_id)
+    queryset = RepairParts.objects.filter(tool_id=tool_id,quantity__gt=0)
     mould = Mould.objects.filter(id=tool_id).values('name')
     print(mould)
     if queryset:
