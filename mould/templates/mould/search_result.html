@@ -7,30 +7,53 @@
 <link rel="stylesheet" href="{% static 'web/css/carousel.css' %}" />
 
 {% endblock %} {% block content %}
-<div class="container">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
   {% if error_msg %} {{ error_msg }} {% else %}
-  <h2>信息展示</h2>
-  <table class="table table-striped">
+{% if request.web.user %}
+                    
+                {% else %}
+                    <div class="bs-example bs-example-standalone" data-example-id="dismissible-alert-js">
+    <div class="alert alert-danger alert-dismissible fade in" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+      <strong><h4>登录警告</h4></strong>
+      <p>需要查询模具档案和备件信息须登录账户方可查询。
+      <a target="_blank" href="{% url 'login'  %}"
+          >登录</a></p>
+        </div>
+                {% endif %}
+
+
+<div class= "text-center">
+<h3>查询结果<span class="label badge">{{count}}</span></h3>
+</div>
+<div class="table-responsive">
+    <table class="table table-bordered text-center">
     <thead>
       <tr>
-        <th>模具编号</th>
-        <th>零件号</th>
-        <th>工序号</th>
-        <th>工序名称</th>
-        <th>定置</th>
-        <th>备件</th>
+        
+        <th class= 'active text-center'>零件号</th>
+        <th class= 'text-center'>工序</th>
+        <th class= 'success text-center'>定置</th>
+        <th class= 'text-center'>工序名称</th>
+        
+        <th class= 'info text-center'>模具编号</th>
+        <th class= 'text-center'>备件</th>
       </tr>
     </thead>
     {% for sr in search_result %}
     <tr>
-      <td>
+      
+      <td class= 'active '>{{ sr.part_no }}</td>
+      <td>{{ sr.op }}</td>
+      <td class= 'success'>{{sr.location}}</td>
+      <td>{{ sr.name }}</td>
+
+      
+      <td class= 'info'>
         <a target="_blank" href="#"
           >{{ sr.tool_no }}</a>
       </td>
-      <td>{{ sr.part_no }}</td>
-      <td>{{ sr.op }}</td>
-      <td>{{ sr.name }}</td>
-      <td>{{sr.location}}</td>
       <td>
         <a href="{% url 'r_parts' tool_id=sr.id %}"
           >查询</a>
@@ -41,9 +64,18 @@
 
 
   </table>
-  <div><p><mark>模具档案及备件</mark>信息须<strong><a target="_blank" href="{% url 'login'  %}"
-          >登录</a></strong>方可查看！</p>
+
+  </div>
+  <hr style="border-top:1px dashed #987cb9;" width="100%" color="#987cb9" size=1>
+
+  </div>
 </div >
   {% endif %}
+<nav style="text-align: center;" aria-label="...">
+                <ul class="pagination" style="margin-top: 0px">
+                    {{ page_html|safe }}
+                </ul>
+            </nav>
 </div>
+
 {% endblock %}
