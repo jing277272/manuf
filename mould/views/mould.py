@@ -21,15 +21,19 @@ def search1(request):
     if A1:
         print("A1")
         search_result = Mould.objects.filter(tool_no__contains=A1)
-        print(search_result)
-        return render(request,'mould/search_result.html',{'search_result':search_result}) 
-        
+        count=search_result.count()
+        if search_result:
+            return render(request,'mould/search_result.html',{'search_result':search_result, 'count': count}) 
+        else:
+            error_msg = "对不起！没有找到查询结果，请输入正确的信息"
     if A2:
         print("A2")
         search_result = Mould.objects.filter(part_no__contains=A2)
-        print(search_result)
-        return render(request,'mould/search_result.html',{'search_result':search_result}) 
-      
+        count=search_result.count()
+        if search_result:
+            return render(request,'mould/search_result.html',{'search_result':search_result, 'count': count}) 
+        else:
+            error_msg = "对不起！没有找到查询结果，请输入正确的信息"
     error_msg = "出错了！没有找到查询结果，请输入正确的信息"
     print(locals())
     return render(request,'mould/search_result.html',locals()) 
