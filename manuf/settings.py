@@ -173,12 +173,8 @@ WHITE_REGEX_URL_LIST = [
     '/index/',
     '/',
     '/image/repair/',
-
     '/scearch/',
 
-
-    '/xadmin/',    
-    'xadmin/xadmin/bookmark/add/',
 ]
 
 try:
