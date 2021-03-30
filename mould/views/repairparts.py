@@ -35,9 +35,14 @@ def r_parts(request, tool_id):
         return render(request, 'mould/repair.html', locals())
     form = RepairpartsModelForm(request, data=request.POST)
     if form.is_valid():
-        
-        
-        # 保存
-        form.save()
+                
+        return JsonResponse({'status': True, })
+    return JsonResponse({'status': False, 'error': form.errors})
+
+def add_rpairt (request, tool_id):
+    if request.method== 'GET':
+        form = RepairpartsModelForm()
+        return render(request, 'mould/r_parts.html', {'form': form})
+    if form.is_valid():
         return JsonResponse({'status': True, })
     return JsonResponse({'status': False, 'error': form.errors})

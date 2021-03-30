@@ -9,7 +9,7 @@
 {% endblock %} {% block content %}
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-  {% if error_msg %} {{ error_msg }} {% else %}
+  {% if error_msg %}<div class= "text-center"> {{ error_msg }} </div>{% else %}
 {% if request.web.user %}
                     
                 {% else %}

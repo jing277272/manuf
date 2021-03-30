@@ -23,6 +23,10 @@ def search1(request):
         print("A1")
         search_result = Mould.objects.filter(tool_no__contains=A1)
         count = search_result.count()
+        if count==0:
+            error_msg = "抱歉！没有找到查询结果!"
+            print(locals())
+            return render(request,'mould/search_result.html',locals())
         page_object = Pagination(
             current_page=request.GET.get('page'),
             all_count=search_result.count(),
@@ -45,6 +49,10 @@ def search1(request):
         print("A2")
         search_result = Mould.objects.filter(part_no__contains=A2)
         count = search_result.count()
+        if count==0:
+            error_msg = "抱歉！没有找到查询结果!"
+            print(locals())
+            return render(request,'mould/search_result.html',locals())
         page_object = Pagination(
             current_page=request.GET.get('page'),
             all_count=search_result.count(),

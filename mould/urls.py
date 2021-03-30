@@ -7,6 +7,8 @@ urlpatterns = [
     url(r'^scearch/$', mould.search1, name='search1'),
     url(r'^repairparts/(?P<tool_id>\d+)/$',
         repairparts.r_parts, name='r_parts'),
+    url(r'^addrpart/(?P<tool_id>\d+)/$',
+        repairparts.add_rpairt, name='add_rparts'),
 
 
     # 路由分发
