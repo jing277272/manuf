@@ -14,7 +14,11 @@
 <div class="container text-center">
 {% if error_msg %}
  {{ error_msg }}
-<a class="btn btn-success btn-sm" data-toggle="modal" data-target="#request">备件申报</a>
+    <!-- Button trigger modal -->
+    <div style="margin-bottom: 10px;">
+    <a class="btn btn-success" style="margin-right: 20px;" data-toggle="modal" data-target="#request">备件申报</a>
+        <a style="margin-left: 30px" href="{% url 'add_rpart' tool_id=tool_id%}"class="btn btn-warning ">添加备件</a>
+    </div>
    
     
 {% else %} 
@@ -71,7 +75,10 @@
 
     {% endfor %}</table>
     <!-- Button trigger modal -->
-    <a class="btn btn-success" data-toggle="modal" data-target="#request">备件申报</a>
+    <div style="margin-bottom: 10px;">
+    <a class="btn btn-success" style="margin-right: 20px;" data-toggle="modal" data-target="#request">备件申报</a>
+    <a target="_blank"style="margin-left: 30px"href="{% url 'add_rpart' tool_id=tool_id %}"class="btn btn-warning ">添加备件</a>
+    </div>
 {% endif %}
 <nav style="text-align: center;" aria-label="...">
                 <ul class="pagination" style="margin-top: 0px">

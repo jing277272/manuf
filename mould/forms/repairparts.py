@@ -13,9 +13,9 @@ class RepairpartsModelForm(BootStrapForm, forms.ModelForm):
     local = forms.CharField(label="货位号")
     quantity = forms.CharField(label="在库数量")
 
-    def __init__(self, request, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.request = request
+    class Meta:
+        model = models.RepairParts
+        fields ="__all__"
 
 class Deliver(forms.Form):
     pass

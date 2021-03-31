@@ -8,7 +8,7 @@ urlpatterns = [
     url(r'^repairparts/(?P<tool_id>\d+)/$',
         repairparts.r_parts, name='r_parts'),
     url(r'^addrpart/(?P<tool_id>\d+)/$',
-        repairparts.add_rpairt, name='add_rparts'),
+        repairparts.add_rpairt, name='add_rpart'),
 
 
     # 路由分发
