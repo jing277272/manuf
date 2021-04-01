@@ -107,25 +107,24 @@ class Mould(models.Model):
 
 
 class RepairParts(models.Model):
-    TYPE_CHOICES = (
+    type_choices = {
         ('0', '凹模'),
         ('1', '冲头'),
         ('2', 'TD镶块'),
         ('3', '斜楔'),
         ('4', '成型镶块'),
         ('5', '其它'),
-
-    )
+        }
     tool = models.ForeignKey(
         'Mould', related_name='repairpart', on_delete=models.CASCADE)
     type = models.CharField(
-        max_length=1, choices=TYPE_CHOICES, default='0', blank=True, null=True, verbose_name="类型")
-    imgs = models.ImageField(upload_to='repair/', blank=True, null=True)
+        max_length=2, choices=type_choices, default='0', verbose_name="类型")
+    imgs = models.ImageField(upload_to='repair/', blank=True, null=True, verbose_name="照片")
     modify_time = models.DateTimeField(auto_now_add=True, verbose_name="修改时间")
     local = models.CharField(max_length=20, blank=True,
                              null=True, verbose_name="货位号")
     quantity = models.PositiveIntegerField(
-        blank=True, null=True, verbose_name="在库数量")
+        blank=True, null=True, default=1, verbose_name="在库数量")
     modify = models.ForeignKey(blank=False, null=True, default='1', to='web.UserInfo', on_delete=models.CASCADE,
                                verbose_name="修改者")
 

@@ -5,16 +5,14 @@ from mould.forms.bootstrap import BootStrapForm
 
 
 class RepairpartsModelForm(BootStrapForm, forms.ModelForm):
-    """
-    表单生成
-    """
-    type = forms.CharField(label="类型")
-    imgs = forms.ImageField(label="图片")
-    local = forms.CharField(label="货位号")
-    quantity = forms.CharField(label="在库数量")
+
 
     class Meta:
         model = models.RepairParts
+        exclude = ['tool','modify']
+        widgets = {
+            "type":forms.Select(attrs={'class': "selectpicker", "data-live-search": "true"}),
+        }
         fields ="__all__"
 
 class Deliver(forms.Form):
