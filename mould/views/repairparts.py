@@ -51,6 +51,7 @@ def add_rpart(request, tool_id):
         print(request.GET)
         form = RepairpartsModelForm()
         return render(request, 'mould/r_parts.html', {'form': form})
+    print('post')
     print(request.POST)
     form = RepairpartsModelForm(request,data=request.POST)
     if form.is_valid():
