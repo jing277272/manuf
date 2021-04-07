@@ -13,7 +13,11 @@ class RepairpartsModelForm(BootStrapForm, forms.ModelForm):
         widgets = {
             "type":forms.Select(attrs={'class': "selectpicker", "data-live-search": "true"}),
         }
-        fields ="__all__"
+    def __init__(self, request, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.request = request
+    
 
 class Deliver(forms.Form):
     pass

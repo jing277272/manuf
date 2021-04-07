@@ -8,12 +8,11 @@
     font-size: 13px;
   }
 </style>
-{% endblock %} {% block content %} 
+{% endblock %} {% block content %}
 <div class="account">
   <h1 style="text-align: center">模具档案</h1>
   <form id="addForm" method="POST" novalidate>
-    {% csrf_token %}
-    {% for field in form %}
+    {% csrf_token %} {% for field in form %}
     <div class="form-group">
       <label for="{{ field.id_for_label }}">{{ field.label }}</label>
       {{ field }}
@@ -21,13 +20,17 @@
     </div>
 
     {% endfor %}
-    <input id="btnAddSubmit" type="button" class="btn btn-primary" value="保 存" />
+    <input
+      id="btnAddSubmit"
+      type="button"
+      class="btn btn-primary"
+      value="保 存"
+    />
   </form>
 </div>
-{% endblock %}
-{% block js %}
+{% endblock %} {% block js %}
 <script>
-    var POST_ADDRPART="{%url'addrpart'% tool_id=request.tool_id}";
+  var POST_ADDRPART = "{% url 'addrpart' tool_id=tool_id %}";
 
   //页面框架加载完成自动执行
   $(function () {
@@ -38,9 +41,8 @@
    * 点击注册提交
    * */
   function bindClickBtnSubmit() {
-    $('#addForm').find('.error-msg').empty();
-    $('#btnAddSubmit').click(function () 
-    {
+    $("#addForm").find(".error-msg").empty();
+    $("#btnAddSubmit").click(function () {
       $.ajax({
         url: POST_ADDRPART,
         type: "POST",

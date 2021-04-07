@@ -15,7 +15,7 @@ def r_parts(request, tool_id):
         # 分页获取数据
         queryset = RepairParts.objects.filter(tool_id=tool_id, quantity__gt=0)
         moulds = Mould.objects.filter(id=tool_id)  # .values('name')
-        print(tool_id)
+        '''print(tool_id)'''
 
         if queryset:
             page_object = Pagination(
@@ -47,14 +47,19 @@ def r_parts(request, tool_id):
 
 def add_rpart(request, tool_id):
     if request.method == 'GET':
-        print('tool_id')
         print(request.GET)
-        form = RepairpartsModelForm()
-        return render(request, 'mould/r_parts.html', {'form': form})
+        context = {
+                'tool_id': tool_id,
+                'form': RepairpartsModelForm(request),
+            }
+        
+        return render(request, 'mould/r_parts.html',context)
     print(request.POST)
+    print(tool_id)
     form = RepairpartsModelForm(request,data=request.POST)
     if form.is_valid():
-        form.instance.tool_id = request.tool_id
+        print('post成功')
+        form.instance.tool_id = tool_id
         form.instance.modify = request.web.user
         form.save()
         return JsonResponse({'status': True, })
