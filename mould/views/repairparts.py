@@ -48,12 +48,18 @@ def r_parts(request, tool_id):
 def add_rpart(request, tool_id):
     if request.method == 'GET':
         print(request.GET)
+
         context = {
                 'tool_id': tool_id,
                 'form': RepairpartsModelForm(request),
             }
         
         return render(request, 'mould/r_parts.html',context)
+
+        form = RepairpartsModelForm()
+        return render(request, 'mould/r_parts.html', {'form': form})
+    print('post')
+
     print(request.POST)
     print(tool_id)
     form = RepairpartsModelForm(request,data=request.POST)

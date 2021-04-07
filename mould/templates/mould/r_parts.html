@@ -30,7 +30,10 @@
 </div>
 {% endblock %} {% block js %}
 <script>
+
   var POST_ADDRPART = "{% url 'addrpart' tool_id=tool_id %}";
+
+
 
   //页面框架加载完成自动执行
   $(function () {

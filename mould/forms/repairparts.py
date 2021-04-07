@@ -5,6 +5,7 @@ from mould.forms.bootstrap import BootStrapForm
 
 
 class RepairpartsModelForm(BootStrapForm, forms.ModelForm):
+    
 
 
     class Meta:
