@@ -18,7 +18,10 @@ class RepairpartsModelForm(BootStrapForm, forms.ModelForm):
         super().__init__(*args, **kwargs)
 
         self.request = request
-    
+    def clean_local(self):
+        local = self.cleaned_data['local']
+
+        return local
 
 class Deliver(forms.Form):
     pass

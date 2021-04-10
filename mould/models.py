@@ -121,10 +121,10 @@ class RepairParts(models.Model):
         max_length=2, choices=type_choices, default='0', verbose_name="类型")
     imgs = models.ImageField(upload_to='repair/', blank=True, null=True, verbose_name="照片")
     modify_time = models.DateTimeField(auto_now_add=True, verbose_name="修改时间")
-    local = models.CharField(max_length=20, blank=True,
-                             null=True, verbose_name="货位号")
+    local = models.CharField(max_length=20, 
+                             null=False, verbose_name="货位号")
     quantity = models.PositiveIntegerField(
-        blank=True, null=True, default=1, verbose_name="在库数量")
+        null=True, default=1, verbose_name="在库数量")
     modify = models.ForeignKey(blank=False, null=True, default='1', to='web.UserInfo', on_delete=models.CASCADE,
                                verbose_name="修改者")
 
