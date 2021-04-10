@@ -28,3 +28,4 @@ from web import models
 models.UserInfo.objects.create(
     username=username, nickname=nickname, avatar=avatar, email='111@111.com', mobile_phone='111111111', team='T0', work_id=work_id, password=encrypt.md5(passw))
 print("创建成功！")
+
