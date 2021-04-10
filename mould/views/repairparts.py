@@ -39,9 +39,11 @@ def r_parts(request, tool_id):
         error_msg = "出错了！没有备件在库信息！"
 
         return render(request, 'mould/repair.html', locals())
-    form = RepairpartsModelForm(request, data=request.POST)
-    if form.is_valid():
-
+    
+    tool_id= request.POST.get('tool_id')
+    quantity= 
+    if True:
+        RepairParts.objects.filter(id=tool_id).update(quantity=quantity)
         return JsonResponse({'status': True, })
     return JsonResponse({'status': False, 'error': form.errors})
 
@@ -55,10 +57,10 @@ def add_rpart(request, tool_id):
                 'form': RepairpartsModelForm(request),
             }
         
-        return render(request, 'mould/r_parts.html',context)
+        return render(request, 'mould/a_rparts.html',context)
 
         form = RepairpartsModelForm()
-        return render(request, 'mould/r_parts.html', {'form': form})
+        return render(request, 'mould/a_rparts.html', {'form': form})
     print('post')
 
     print(request.POST)

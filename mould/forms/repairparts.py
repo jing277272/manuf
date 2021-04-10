@@ -24,7 +24,14 @@ class RepairpartsModelForm(BootStrapForm, forms.ModelForm):
         return local
 
 class Deliver(forms.Form):
-    pass
+    model = models.RepairParts
+    
+
+    def clean_quantity(self):
+        quantity = self.cleaned_data['quantity']
+
+        return local
+
 
 
     def __init__(self, request, *args, **kwargs):

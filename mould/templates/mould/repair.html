@@ -45,7 +45,7 @@
 
 
     </tr>
-<!-- Modal -->
+<!-- 领用Modal -->
 <div class="modal fade" id="use{{sr.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -67,7 +67,7 @@
       
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="button" class="btn btn-success">提交</button>
+        <button id="btnDeliverSubmit" type="button" class="btn btn-success">提交</button>
       </div>
     </div>
   </div>
@@ -86,8 +86,8 @@
                 </ul>
             </nav>
 </div>
-<!-- Modal -->
-<div class="modal fade" id="request" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<!-- 申报Modal -->
+<div id="R_rpart" class="modal fade" id="request" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -119,9 +119,13 @@
     <script src="{% static 'web/plugin/select2/js/select2.min.js' %}"></script>
     <script src="{% static 'web/plugin/select2/js/i18n/zh-CN.js' %}"></script>
 <script>
+var POST_DELRPART = "{% url 'r_parts' tool_id={{sr.id}} %}";
+
+
         $(function () {
             bindBootStrapShowEvent();
             bindBootStrapRequest();
+            bindDeliverSubmit();
         });
         function bindBootStrapShowEvent() {
             $("#use").on('shown.bs.modal', function (event) {
@@ -133,7 +137,27 @@ function bindBootStrapRequest(){
           // do something...
 }
 );}
-
+//领用备件
+ function bindDeliverSubmit(){
+         $('#btnDeliverSubmit').click(function () {
+                $.ajax({
+                    url: POST_DELRPART,
+                    type: 'POST',
+                    data: $('#use{{sr.id}}').serialize(),
+                    dataType: 'JSON',
+                    success: function (res) {
+                        if (res.status) {
+                            location.href = location.href
+                        } else {
+                            //错误信息
+                            $.each(res.error, function (k, v) {
+                                $('#id_' + k).parent().next('.error-msg').text(v[0]);
+                            });
+                        }
+                    }
+                })
+            })
+ }
 </script>
 
 {% endblock %}
