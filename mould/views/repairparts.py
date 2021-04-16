@@ -41,7 +41,7 @@ def r_parts(request, tool_id):
         return render(request, 'mould/repair.html', locals())
     
     tool_id= request.POST.get('tool_id')
-    quantity= 
+    quantity=  request.POST.get('quantity')
     if True:
         RepairParts.objects.filter(id=tool_id).update(quantity=quantity)
         return JsonResponse({'status': True, })

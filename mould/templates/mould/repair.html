@@ -47,14 +47,53 @@
     </tr>
 <!-- 领用Modal -->
 <div class="modal fade" id="use{{sr.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
+
+  <div class="modal-dialog" role="form">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">备件领取</h4>
       </div>
+      <div class="modal-body" >
+      <form id="addForm" role="form" class="form-horizontal">
       <div class="modal-body show-grid">
-        <div class="row">
+      {% csrf_token %}
+      <div class="form-group clearfix">
+      <div class="control-label">
+      <label class="col-md-4 ">存放位置</label>
+                                    <div>
+                                    <div  class="offset-3 col-md-3">
+                                    <div>
+                                       <input class="form-control" id="disabledInput" type="text" placeholder="{{ sr.local }}" disabled> 
+                                    </div>
+                                    </div>
+                                    <div class="error-msg"></div>
+                                </div>
+                                <div class="error-msg"></div>
+                            </div>
+                        </div>
+
+      
+      <div class="form-group clearfix">
+      <div class="control-label">
+         <label class="col-md-6 control-label">领用数量</label>
+         
+                                <div>
+                                    <div  class="col-md-6">
+                                        <input class="form-control" type="text"  value="1">
+                                    </div>
+                                    <div class="error-msg"></div>
+                                </div>
+                                <div class="error-msg"></div>
+                            </div>
+                        </div>
+
+                
+        
+
+     <!-- 备件申报 
+      <div class="row ">
           <div class="col-xs-6 col-sm-6">存放位置</div>
           <div class="col-xs-6 col-sm-6">{{ sr.local }}</div>
         </div>
@@ -64,13 +103,14 @@
           
         </div>
       </div>
-      
+      --> 
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
         <button id="btnDeliverSubmit" type="button" class="btn btn-success">提交</button>
-      </div>
+      </div></form>
     </div>
   </div>
+  
   <div><img src="{{ sr.imgs }}" class="img" style="height: 40px;"></div>
 
     {% endfor %}</table>
@@ -87,7 +127,7 @@
             </nav>
 </div>
 <!-- 申报Modal -->
-<div id="R_rpart" class="modal fade" id="request" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="request" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -118,8 +158,9 @@
     <script src="{% static 'web/plugin/bootstrap-select/js/i18n/defaults-zh_CN.min.js' %}"></script>
     <script src="{% static 'web/plugin/select2/js/select2.min.js' %}"></script>
     <script src="{% static 'web/plugin/select2/js/i18n/zh-CN.js' %}"></script>
+
 <script>
-var POST_DELRPART = "{% url 'r_parts' tool_id={{sr.id}} %}";
+var POST_DELRPART = "{% url 'r_parts' tool_id=tool_id %}";
 
 
         $(function () {
@@ -143,7 +184,7 @@ function bindBootStrapRequest(){
                 $.ajax({
                     url: POST_DELRPART,
                     type: 'POST',
-                    data: $('#use{{sr.id}}').serialize(),
+                    data: 'tool_id=tool_id {% csrf_token %}',
                     dataType: 'JSON',
                     success: function (res) {
                         if (res.status) {

@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^', include('web.urls')),
     url(r'^', include('mould.urls')),
     url(r'^', include('welding.urls')),
+    url(r'^', include('app01.urls')),
 
 ]
