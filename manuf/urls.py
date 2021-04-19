@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
+from xadmin.plugins import xversion
+import xadmin
 
 urlpatterns = [
     
@@ -24,5 +26,6 @@ urlpatterns = [
     url(r'^', include('mould.urls')),
     url(r'^', include('welding.urls')),
     url(r'^', include('app01.urls')),
+    path('xadmin/', xadmin.site.urls),
 
 ]

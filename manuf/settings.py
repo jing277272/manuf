@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'web.apps.WebConfig',
     'mould.apps.MouldConfig',
     'welding.apps.WeldingConfig',
+    'xadmin',
+    'crispy_forms',
+    'reversion'
 
 
 ]
@@ -56,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'web.middleware.auth.AuthMiddleWare',
+    
 ]
 
 ROOT_URLCONF = 'manuf.urls'
