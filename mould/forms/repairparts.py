@@ -12,7 +12,7 @@ class RepairpartsModelForm(BootStrapForm, forms.ModelForm):
         model = models.RepairParts
         exclude = ['tool','modify']
         widgets = {
-            "type":forms.Select(attrs={'class': "selectpicker", "data-live-search": "true"}),
+            "type":forms.Select(attrs={"data-live-search": "true"}),
         }
     def __init__(self, request, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -14,7 +14,7 @@ def r_parts(request, tool_id):
     if request.method == 'GET':
         # 分页获取数据
         queryset = RepairParts.objects.filter(tool_id=tool_id, quantity__gt=0)
-        moulds = Mould.objects.filter(id=tool_id)  # .values('name')
+        mould_object = Mould.objects.filter(id=tool_id).first()  # .values('name')
         '''print(tool_id)'''
 
         if queryset:
@@ -26,23 +26,29 @@ def r_parts(request, tool_id):
                 per_page=9
             )
 
-            mould_object_list = queryset[page_object.start:page_object.end]
+            rparts_object_list = queryset[page_object.start:page_object.end]
+            print(mould_object)
+
+            form = RepairpartsModelForm(request)
 
             context = {
                 'tool_id': tool_id,
-                'mould': moulds,
-                'search_result': mould_object_list,
+                'mould': mould_object,
+                'search_result': rparts_object_list,
                 'page_html': page_object.page_html(),
+                'form': form,
             }
             return render(request, 'mould/repair.html', context)
 
         error_msg = "出错了！没有备件在库信息！"
 
         return render(request, 'mould/repair.html', locals())
-    
+     # 备件出库
+    print('Post')
     tool_id= request.POST.get('tool_id')
     quantity=  request.POST.get('quantity')
-    if True:
+    print(tool_id)
+    if quantity :
         RepairParts.objects.filter(id=tool_id).update(quantity=quantity)
         return JsonResponse({'status': True, })
     return JsonResponse({'status': False, 'error': form.errors})

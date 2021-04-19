@@ -56,14 +56,31 @@
         <h4 class="modal-title" id="myModalLabel">备件领取</h4>
       </div>
       <div class="modal-body" >
-      <form id="addForm" role="form" class="form-horizontal">
+      <form id="useForm{{sr.id}}" role="form" class="form-horizontal">
       <div class="modal-body show-grid">
       {% csrf_token %}
+ <div class="form-group clearfix">
+      <div class="control-label">
+      <label class="col-md-4 ">产品件号</label>
+                                    <div>
+                                    <div  class="col-md-6">
+                                    <div>
+                                       <input class="form-control" id="disabledInput" type="text" placeholder="{{ mould.part_no }}" disabled> 
+                                    </div>
+                                    </div>
+                                    <div class="error-msg"></div>
+                                </div>
+                                <div class="error-msg"></div>
+                            </div>
+                        </div>
+
+
+      
       <div class="form-group clearfix">
       <div class="control-label">
       <label class="col-md-4 ">存放位置</label>
                                     <div>
-                                    <div  class="offset-3 col-md-3">
+                                    <div  class="col-md-6">
                                     <div>
                                        <input class="form-control" id="disabledInput" type="text" placeholder="{{ sr.local }}" disabled> 
                                     </div>
@@ -77,7 +94,7 @@
       
       <div class="form-group clearfix">
       <div class="control-label">
-         <label class="col-md-6 control-label">领用数量</label>
+         <label class="col-md-4">领用数量</label>
          
                                 <div>
                                     <div  class="col-md-6">
@@ -117,7 +134,7 @@
     <!-- Button trigger modal -->
     <div style="margin-bottom: 10px;">
     <a class="btn btn-success" style="margin-right: 20px;" data-toggle="modal" data-target="#request">备件申报</a>
-    <a target="_blank"style="margin-left: 30px"href="{% url 'addrpart' tool_id=tool_id %}"class="btn btn-warning ">添加备件</a>
+    <a target="_blank"style="margin-left: 30px"class="btn btn-warning " data-toggle="modal" data-target="#add" >添加备件</a>
     </div>
 {% endif %}
 <nav style="text-align: center;" aria-label="...">
@@ -144,9 +161,40 @@
     </div>
   </div>
 </div>
+<!-- 增加备件AddModal -->
+<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">备件入库</h4>
+      </div>
+      <div class="modal-body">
 
+  <form id="addForm">
+    {% csrf_token %} 
+    {% for field in form %}
+    <div class="form-group">
+      <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+      <div class="col-md-10">
+      {{ field }}
+      <div class="error-msg"></div></div>
+    </div>
 
+    {% endfor %}
+
+  </form>
+</div>
+
+<div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button id="btnAddSubmit" type="button" class="btn btn-success">提交</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %} 
 
@@ -161,15 +209,22 @@
 
 <script>
 var POST_DELRPART = "{% url 'r_parts' tool_id=tool_id %}";
-
+var POST_ADDRPART = "{% url 'addrpart' tool_id=tool_id %}";
 
         $(function () {
             bindBootStrapShowEvent();
+            bindBootStrapShowADD();
             bindBootStrapRequest();
             bindDeliverSubmit();
+            bindAddSubmit();
         });
-        function bindBootStrapShowEvent() {
+function bindBootStrapShowEvent() {
             $("#use").on('shown.bs.modal', function (event) {
+                  // do something...
+            });
+        }
+function bindBootStrapShowADD() {
+            $("#add").on('shown.bs.modal', function (event) {
                   // do something...
             });
         }
@@ -179,12 +234,12 @@ function bindBootStrapRequest(){
 }
 );}
 //领用备件
- function bindDeliverSubmit(){
-         $('#btnDeliverSubmit').click(function () {
+function bindDeliverSubmit(){
+  $('#btnDeliverSubmit').click(function () {
                 $.ajax({
                     url: POST_DELRPART,
                     type: 'POST',
-                    data: 'tool_id=tool_id {% csrf_token %}',
+                    data: $("#useForm{{sr.id}}").serialize(),
                     dataType: 'JSON',
                     success: function (res) {
                         if (res.status) {
@@ -199,6 +254,31 @@ function bindBootStrapRequest(){
                 })
             })
  }
+//添加备件
+        function bindAddSubmit() {
+            $('#addForm').find('.error-msg').empty();
+            $('#btnAddSubmit').click(function () {
+                $.ajax({
+        url: POST_ADDRPART,
+        type: "POST",
+        data: $("#addForm").serialize(),
+        dataType: "JSON",
+        success: function (res) {
+          if (res.status) {
+            location.href = location.href;
+          } else {
+            $.each(res.error, function (key, value) {
+              $("#id_" + key)
+                .next()
+                .text(value[0]);
+            });
+          }
+        },
+      });
+    });
+  }
+
+
 </script>
 
 {% endblock %}
