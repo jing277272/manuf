@@ -14,10 +14,10 @@
 <div class="container text-center">
 {% if error_msg %}
  {{ error_msg }}
-    <!-- Button trigger modal -->
+<!-- Button trigger modal -->
     <div style="margin-bottom: 10px;">
     <a class="btn btn-success" style="margin-right: 20px;" data-toggle="modal" data-target="#request">备件申报</a>
-        <a style="margin-left: 30px" href="{% url 'addrpart' tool_id=tool_id%}"class="btn btn-warning ">添加备件</a>
+    <a target="_blank"style="margin-left: 30px"class="btn btn-warning " data-toggle="modal" data-target="#add" >添加备件</a>
     </div>
    
     
@@ -56,15 +56,17 @@
         <h4 class="modal-title" id="myModalLabel">备件领取</h4>
       </div>
       <div class="modal-body" >
-      <form id="useForm{{sr.id}}" role="form" class="form-horizontal">
+      <form action="{% url 'r_parts' tool_id=tool_id %}" method="post" role="form" class="form-horizontal">
       <div class="modal-body show-grid">
       {% csrf_token %}
- <div class="form-group clearfix">
+      <div class="form-group clearfix">
       <div class="control-label">
       <label class="col-md-4 ">产品件号</label>
                                     <div>
                                     <div  class="col-md-6">
                                     <div>
+                                      <input type="hidden" name="rpartid" value="{{sr.id}}">
+                                      <input type="hidden" name="tool_id" value="{{tool_id}}">
                                        <input class="form-control" id="disabledInput" type="text" placeholder="{{ mould.part_no }}" disabled> 
                                     </div>
                                     </div>
@@ -98,7 +100,7 @@
          
                                 <div>
                                     <div  class="col-md-6">
-                                        <input class="form-control" type="text"  value="1">
+                                        <input name="use" class="form-control" type="text"  value="1">
                                     </div>
                                     <div class="error-msg"></div>
                                 </div>
@@ -123,7 +125,7 @@
       --> 
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button id="btnDeliverSubmit" type="button" class="btn btn-success">提交</button>
+        <input type="submit" class="btn btn-success"></input>
       </div></form>
     </div>
   </div>
@@ -239,7 +241,7 @@ function bindDeliverSubmit(){
                 $.ajax({
                     url: POST_DELRPART,
                     type: 'POST',
-                    data: $("#useForm{{sr.id}}").serialize(),
+                    data: $("#useForm").serialize(),
                     dataType: 'JSON',
                     success: function (res) {
                         if (res.status) {
