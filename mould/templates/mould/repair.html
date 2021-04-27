@@ -56,7 +56,7 @@
         <h4 class="modal-title" id="myModalLabel">备件领取</h4>
       </div>
       <div class="modal-body" >
-      <form action="{% url 'r_parts' tool_id=tool_id %}" method="post" role="form" class="form-horizontal">
+      <form action="{% url 'r_parts' tool_id=tool_id %}" method="post" role="form" enctype="multipart/form-data" class="form-horizontal">
       <div class="modal-body show-grid">
       {% csrf_token %}
       <div class="form-group clearfix">
@@ -175,14 +175,15 @@
       </div>
       <div class="modal-body">
 
-  <form id="addForm">
+  <form id="addForm" method="post" enctype="multipart/form-data">
     {% csrf_token %} 
     {% for field in form %}
     <div class="form-group">
       <label for="{{ field.id_for_label }}">{{ field.label }}</label>
       <div class="col-md-10">
       {{ field }}
-      <div class="error-msg"></div></div>
+      <div class="error-msg"></div>
+      </div>
     </div>
 
     {% endfor %}

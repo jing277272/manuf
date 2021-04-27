@@ -11,8 +11,9 @@
 {% endblock %} {% block content %}
 <div class="account">
   <h1 style="text-align: center">备件入库</h1>
-  <form id="addForm" method="POST" novalidate>
-    {% csrf_token %} {% for field in form %}
+  <form method="POST" enctype="multipart/form-data" id="addForm"  >
+    {% csrf_token %}
+    {% for field in form %}
     <div class="form-group">
       <label for="{{ field.id_for_label }}">{{ field.label }}</label>
       {{ field }}

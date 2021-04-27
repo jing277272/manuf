@@ -1,90 +1,106 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>用户查询页面(nxy)</title>
-</head>
-<body>
+   <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>HTML5页面如何在手机端浏览器调用相机、相册功能</title>
+    </head>
+    <body>
+    
+    <div>
+        <input type="file" accept="image/*" capture="camera">
+        <input type="file" accept="video/*" capture="camcorder">
+        <input type="file" accept="audio/*" capture="microphone">
+    </div>
+    
+    </body>
+    </html>
+
+
+<script type="text/javascript">
+    //保存个人资料
+    $('#jsEditUserBtn').on('click', function(){
+        var _self = $(this),
+            $jsEditUserForm = $('#jsEditUserForm')
+            //输入验证
+            verify = verifySubmit(
+            [
+                {id: '#address', require: true}
+            ]
+        );
+        if(!verify){
+           return;
+        }
  
-<form align="center" action="/findresult/" method="get">
-查询编号： <input type="text" id="id" name="id"> <br><br>
-	
-	<button  type="button" id='find'>查询</button>
-	&nbsp; &nbsp; &nbsp; &nbsp; 
-	<button  type="button" id='chongzhi' onclick="document.getElementById('id').value=''">重置</button>
-</br></br>
- 
-</form>
- 
-<table class="gridtable" align="center" id="pstable" border="1">
-<thead>
-            <tr>
-                <th align=center width=100>编号</th>
-                <th align=center width=200>姓名</th>
-				<th align=center width=200>处理</th>
-            </tr>
-</thead>
- 
-<tbody>
-</tbody>
- 
-</table>
- 
- 
-<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
-<script>
-	$(document).ready(function(){
-		$("#find").click(function(){
-		var id = $("#id").val();
-		
-		
-		
-		$.get("/findresult/",{'id':id}, function(ret){
-			
-			var obj = eval(ret);
-			
-			var tbody=$('<tbody></tbody>');
-			
-			
-			for(var i=0;i<obj.length;i++){
-				var tr=$('<tr></tr>');
-				tr.append('<td>'+ obj[i]['id'] + '</td>' + '<td>'+ obj[i]['name'] + '</td>' +'<td><a href="/delete?id=' + obj[i]['id'] + '" >删除数据</a></td>' );
-				tbody.append(tr);
-			}
-			
-			$('#pstable tbody').replaceWith(tbody);
-        })
-      });
+        var formobj =  document.getElementById("jsEditUserForm");
+        var dic = new FormData(formobj);
+        var time1 = new Date().getTime();
+        dic.append('img_far',dataURLtoFile(document.getElementById('img_far').src,time1+'.png'));
+        dic.append('img_near',dataURLtoFile(document.getElementById('img_near').src,time1+'.png'));
+        dic.append('img_consult',dataURLtoFile(document.getElementById('img_consult').src,time1+'.png'));
+        $.ajax({
+            type: 'post',
+            dataType:'json',
+            url:"/xadmin/supervision/scene/?time1="+time1,
+            data:dic,
+            processData: false, // tell jquery not to process the data
+            contentType: false, // tell jquery not to set contentType
+            beforeSend:function(XMLHttpRequest){
+                _self.val("保存中...");
+                _self.attr('disabled',true);
+            },
+            success: function(data) {
+                if(data.status == "success"){
+                    Dml.fun.showTipsDialog({
+                        title: '保存成功',
+                        h2: '信息上传成功！'
+                    });
+                    setTimeout(function(){window.location.href = window.location.href;},1500);
+                }
+            },
+            complete: function(XMLHttpRequest){
+                _self.val("保存");
+                _self.removeAttr("disabled");
+            }
+        });
     });
+ 
+ 
+function dataURLtoFile(dataurl, filename) { //将base64转换为文件
+    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+    bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+    while(n--){
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename, {type:mime});
+}
+ 
 </script>
  
-</body>
-</html>
+<script>
+    // 对图片进行压缩
+    function compress(inputid,toimgid) {
+        let fileObj = document.getElementById(inputid).files[0] //上传文件的对象
+        let reader = new FileReader()
+        reader.readAsDataURL(fileObj)
+        reader.onload = function(e) {
+            let image = new Image() //新建一个img标签（还没嵌入DOM节点)
+            image.src = e.target.result
+            image.onload = function() {
+                let canvas = document.createElement('canvas'),
+                context = canvas.getContext('2d'),
+                imageWidth = image.width / 2,    //压缩后图片的大小
+                imageHeight = image.height / 2,
+                data = ''
  
+                canvas.width = imageWidth
+                canvas.height = imageHeight
  
+                context.drawImage(image, 0, 0, imageWidth, imageHeight)
+                data = canvas.toDataURL('image/jpeg')
  
- 
- 
-<style type="text/css">
-  table.gridtable {
-      font-family: verdana,arial,sans-serif;
-      font-size:11px;
-      color:#333333;
-      border-width: 1px;
-      border-color: #666666;
-      border-collapse: collapse;
- }
- table.gridtable th {
-     border-width: 1px;
-     padding: 8px;
-     border-style: solid;
-     border-color: #666666;
-     background-color: #dedede;
- }
- table.gridtable td {
-     border-width: 1px;
-     padding: 8px;
-     border-style: solid;
-     border-color: #666666;
-     background-color: #ffffff;
- }
- </style>
+                //压缩完成
+                document.getElementById(toimgid).src = data
+            }
+        }
+    }
+

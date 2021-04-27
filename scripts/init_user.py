@@ -9,7 +9,7 @@ username = input("请输入用户名：")
 nickname = input("请输入姓名：")
 
 work_id = input("请输入工号：")
-avatar = '/static/img/avatar/'+work_id+'.png'
+avatar = '/static/img/avatar/'+work_id+'.jpg'
 
 passw = input("请输入注册密码：")
 

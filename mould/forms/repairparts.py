@@ -22,6 +22,9 @@ class RepairpartsModelForm(BootStrapForm, forms.ModelForm):
         local = self.cleaned_data['local']
 
         return local
+    def clean_imgs(self):
+        imgs = self.cleaned_data['imgs']
+        return imgs
 
 class Deliver(forms.Form):
     model = models.RepairParts

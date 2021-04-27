@@ -5,6 +5,7 @@ from django.http import HttpResponse, JsonResponse, request
 from mould.models import Mould, RepairParts
 
 
+
 def index(request):
     return render(request, 'web/index.html')
 
@@ -78,14 +79,18 @@ def add_rpart(request, tool_id):
         form = RepairpartsModelForm()
         return render(request, 'mould/a_rparts.html', {'form': form})
     print('post')
+    #获得上传的文件
+    pic = request.FILES.get('imgs')
+    print(pic)
 
-    print(request.POST)
+    print(request.FILES)
     print(tool_id)
     form = RepairpartsModelForm(request,data=request.POST)
     if form.is_valid():
         print('post成功')
         form.instance.tool_id = tool_id
         form.instance.modify = request.web.user
+        form.instance.imgs = request.FILES
         form.save()
         return JsonResponse({'status': True, })
     return JsonResponse({'status': False, 'error': form.errors})
