@@ -1,4 +1,5 @@
 from django.db import models
+
 from datetime import datetime
 
 
@@ -11,6 +12,7 @@ class UserInfo(models.Model):
         ('T0', '技术组'),
         ('T1', '维修一组'),
         ('T2', '维修二组'),)
+    
 
     username = models.CharField(max_length=30, verbose_name="用户名", unique=True, db_index=True)
     nickname = models.CharField(max_length=4, verbose_name="姓名", null=True, blank=True)
@@ -24,6 +26,8 @@ class UserInfo(models.Model):
     is_staff = models.BooleanField(default=True, verbose_name="是否是员工")
     date_joined = models.DateTimeField(default=datetime.now, verbose_name="加入时间")
     subscribe = models.BooleanField(default=False)
+
+
 
 class PricePolicy(models.Model):
     """
