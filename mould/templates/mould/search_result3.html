@@ -1,0 +1,67 @@
+{% extends 'layout/basic.html' %} {% load static %} {% block title %} 首页 
+{% endblock %} {% block css %}
+<link
+  rel="stylesheet"
+  href="{% static 'web/plugin/bootstrap/css/bootstrap.css' %}"
+/>
+<link rel="stylesheet" href="{% static 'web/css/carousel.css' %}" />
+
+{% endblock %} {% block content %}
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+  {% if error_msg %}<div class= "text-center"> {{ error_msg }} </div>{% else %}
+{% if request.web.user %}
+                    
+                {% else %}
+                    <div class="bs-example bs-example-standalone" data-example-id="dismissible-alert-js">
+    <div class="alert alert-danger alert-dismissible fade in" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+      <strong><h4>登录警告</h4></strong>
+      <p>需要查询模具档案和备件信息须登录账户方可查询。
+      <a target="_blank" href="{% url 'login'  %}"
+          >登录</a></p>
+        </div>
+                {% endif %}
+
+
+<div class= "text-center">
+<h3>库房标准件在库查询结果<span class="label badge">{{count}}</span></h3>
+</div>
+<div class="table-responsive">
+    <table class="table table-bordered text-center">
+    <thead>
+      <tr>
+        
+        <th class= 'active text-center'>型号</th>
+        <th class= 'text-center'>数量</th>
+        <th class= 'success text-center'>定置</th>
+
+      </tr>
+    </thead>
+    {% for sr in search_result %}
+    <tr>
+      
+      <td class= 'active '>{{ sr.model }}</td>
+      <td>{{ sr.quantity }}</td>
+      <td class= 'success'>{{sr.local}}</td>
+     
+
+    {% endfor %}
+
+
+  </table>
+
+  </div>
+  <hr style="border-top:1px dashed #987cb9;" width="100%" color="#987cb9" size=1>
+
+  </div>
+</div >
+  {% endif %}
+<nav style="text-align: center;" aria-label="...">
+                <ul class="pagination" style="margin-top: 0px">
+                    {{ page_html|safe }}
+                </ul>
+            </nav>
+</div>
+
+{% endblock %}

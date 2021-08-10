@@ -93,11 +93,15 @@ def change_name(request):
 
 
 def change_pwd(request):
+    print(request)
 
     if request.method == 'POST':
+        print(request.POST)
         form = ChangepwdForm(request.POST)
         if form.is_valid():
-            username = request.user.username
+            print("通过验证")
+            username = request.user
+            print(username)
             oldpassword = request.POST.get('oldpassword', '')
             user = auth.authenticate(username=username, password=oldpassword)
             if user is not None and user.is_active:

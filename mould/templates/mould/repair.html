@@ -28,7 +28,7 @@
     <thead>
     <tr>
     <th class= 'active text-center'>编号</th>
-    <th class= 'text-center'>备件名称</th>
+    <th class= 'text-center'>名称</th>
     <th class= 'info text-center'>图示</th>
     <th class= 'text-center'>数量</th>
     <th class= 'success text-center'>领用</th>
@@ -36,11 +36,11 @@
     </thead>
     {% for sr in search_result %}
         <tr>
-        <td class= 'active text-center'>{{ sr.id }}</a></td>
-        <td>{{ sr.get_type_display }}</td>
-        <td><a target="_blank"href="{{ sr.imgs }}"><img src="{{ sr.imgs }}" class="img" style="height: 40px;"></td></a>
-        <td>{{ sr.quantity }}</td>
-        <td class= 'success text-center'> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#use{{sr.id}}">申领</button></td>
+        <td class= 'active' style="vertical-align:middle;text-align:center;">{{ sr.id }}</a></td>
+        <td style="vertical-align:middle;text-align:center;">{{ sr.get_type_display }}</td>
+        <td align="center" valign="middle" class= 'info'><a target="_blank"href="{{ sr.imgs }}"><img src="{{ sr.imgs }}" style="height: 60px"></td></a>
+        <td style="vertical-align:middle;text-align:center;">{{ sr.quantity }}</td>
+        <td class= 'success text-center' style="vertical-align:middle;text-align:center;" > <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#use{{sr.id}}">申领</button></td>
 
 
 
@@ -130,7 +130,7 @@
     </div>
   </div>
   
-  <div><img src="{{ sr.imgs }}" class="img" style="height: 40px;"></div>
+  <div><img src="{{ sr.imgs }}" class="img-thumbnail"></div>
 
     {% endfor %}</table>
     <!-- Button trigger modal -->
@@ -187,8 +187,7 @@
     </div>
 
     {% endfor %}
-
-  </form>
+  
 </div>
 
 <div class="modal-footer">
@@ -198,7 +197,7 @@
     </div>
   </div>
 </div>
-
+</form>
 {% endblock %} 
 
 {% block js %}
@@ -261,11 +260,15 @@ function bindDeliverSubmit(){
         function bindAddSubmit() {
             $('#addForm').find('.error-msg').empty();
             $('#btnAddSubmit').click(function () {
+              let formData = new FormData($("#addForm")[0]);
                 $.ajax({
         url: POST_ADDRPART,
         type: "POST",
-        data: $("#addForm").serialize(),
+        data: formData,
         dataType: "JSON",
+        contentType: false, //表示不处理数据
+        processData: false,
+        cache: false,
         success: function (res) {
           if (res.status) {
             location.href = location.href;

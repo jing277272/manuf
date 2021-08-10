@@ -23,10 +23,10 @@ def search1(request):
         print("A1")
         search_result = Mould.objects.filter(tool_no__contains=A1)
         count = search_result.count()
-        if count==0:
+        if count == 0:
             error_msg = "抱歉！没有找到查询结果!"
             print(locals())
-            return render(request,'mould/search_result.html',locals())
+            return render(request, 'mould/search_result.html', locals())
         page_object = Pagination(
             current_page=request.GET.get('page'),
             all_count=search_result.count(),
@@ -49,10 +49,10 @@ def search1(request):
         print("A2")
         search_result = Mould.objects.filter(part_no__contains=A2)
         count = search_result.count()
-        if count==0:
+        if count == 0:
             error_msg = "抱歉！没有找到查询结果!"
             print(locals())
-            return render(request,'mould/search_result.html',locals())
+            return render(request, 'mould/search_result.html', locals())
         page_object = Pagination(
             current_page=request.GET.get('page'),
             all_count=search_result.count(),
@@ -74,52 +74,9 @@ def search1(request):
     else:
         error_msg = "对不起！没有找到查询结果!"
         print(locals())
-    return render(request,'mould/search_result.html',locals()) 
+    return render(request, 'mould/search_result.html', locals())
 
 
-# 在库备件查询
-
-
-
-
-
-#form = IssuesModelForm(request, data=request.POST)
-'''if form.is_valid():
-    form.instance.project = request.web.project
-    form.instance.creator = request.web.user
-    # 保存
-    form.save()
-    return JsonResponse({'status': True, })
-return JsonResponse({'status': False, 'error': form.errors})'''
-
-
-def scearch3(request):
-
-    if request.method != 'GET':
-        return render(request, 'web/index.html')
-    A1 = request.POST.get('local_mould_id')
-    A2 = request.POST.get('local_part_no')
-    B1 = request.POST.get('r_mould_id')
-    B2 = request.POST.get('r_part_no')
-    Parts_D = request.POST.get('P')
-    Parts_L = request.POST.get('L')
-    Parts_P = request.POST.get('P')
-    Parts_W = request.POST.get('W')
-
-    print("搜索关键词")
-    if not (A1 or A2):
-        search_result = Mould.objects.filter(Q(part_no__contains=A2)).first()
-        print(search_result)
-        return render(request, 'mould/search_result.html', locals())
-    elif not (B1 or B2):
-        S1 = models.Mould.objects.filter(Q(tool_no=B1) | Q(part_no=B2)).first()
-        search_result = models.RepairParts.objects.filter(Q(tool=S1)).first()
-        return render(request, 'mould/search_result.html', locals())
-    elif not (Parts_D or Parts_L or Parts_p or Parts_W):
-        pass
-    else:
-        error_msg = "您需要输入想要搜索的内容"
-        return render(request, 'mould/search_result.html', locals())
 
 
 # 创建模具档案

@@ -119,7 +119,7 @@ class RepairParts(models.Model):
         'Mould', related_name='repairpart', on_delete=models.CASCADE)
     type = models.CharField(
         max_length=2, choices=type_choices, default='0', verbose_name="类型")
-    imgs = models.ImageField(upload_to='repair/', blank=True, null=True, verbose_name="照片")
+    imgs = models.ImageField( blank=True, null=True, verbose_name="照片")
     modify_time = models.DateTimeField(auto_now_add=True, verbose_name="修改时间")
     local = models.CharField(max_length=20, 
                              null=False, verbose_name="货位号")
@@ -131,6 +131,20 @@ class RepairParts(models.Model):
     class Meta:
         db_table = "m_RepairParts"
 
+
+
+class SpecialParts(models.Model):
+    modify_time = models.DateTimeField(auto_now_add=True, verbose_name="修改时间")
+
+    local = models.CharField(max_length=20, 
+                             null=False, verbose_name="货位编号")
+    model = models.CharField(max_length=40, 
+                             null=False, verbose_name="规格型号")
+    quantity = models.PositiveIntegerField(
+        null=True, default=1, verbose_name="在库数量")
+
+    class Meta:
+        db_table = "m_specialparts"
 
 class FaultPost(models.Model):
     POST_CHOICES = (

@@ -27,7 +27,7 @@ DEBUG = True
 
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -135,16 +135,19 @@ USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-
-STATIC_URL = '/static/'
+#设置访问静态文件的url地址前缀
+STATIC_URL = 'static/'
+#设置静态文件的物理目录
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
-#项目中存储上传文件的根目录[暂时配置]，
-MEDIA_ROOT = os.path.join(BASE_DIR,"uploads")
 
+
+#项目中存储上传文件的根目录[暂时配置]，
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/uploads')
 #访问上传文件的url地址前缀
-MEDIA_URL ="/media/"
+MEDIA_URL ="media/"
+
 
 # 自己的短信模板相关配置
 SMS_APP_ID = 00000000  # 应用ID
@@ -177,7 +180,8 @@ WHITE_REGEX_URL_LIST = [
     '/index/',
     '/',
     '/image/repair/',
-    '/scearch/',
+    '/search/',
+    '/search3/',
 
 ]
 
