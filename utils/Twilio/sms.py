@@ -10,7 +10,7 @@ def send_message(phone_num,tpl,code,nickname):
 	user_name = nickname
 	if tpl == 'register':
 		client = Client(account_sid, auth_token) # 账户认证
-		message = client.messages.create(to="+8618872581558", # 接受短信的手机号 注意写中国区号 +86
+		message = client.messages.create(to="+8615971003309", # 接受短信的手机号 注意写中国区号 +86
 		from_="+17326064111", # api参数 Number(领取的虚拟号码+17326064111
 		body="\n用户"+str(user_name)+"您好！\n您通过"+str(phone_num)+"注册的短信验证码："+str(code)+"\n请勿透露他人") #自定义短信内容
 		print('接收短信号码：'+message.to)# 打印发送时间和发送状态：

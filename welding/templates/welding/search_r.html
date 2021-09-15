@@ -1,0 +1,116 @@
+{% extends 'layout/basic.html' %} {% load static %} 
+{% block title %} 零件参数查询 
+{% endblock %} 
+{% block css %}
+<link
+  rel="stylesheet"
+  href="{% static 'web/plugin/bootstrap/css/bootstrap.css' %}"
+/>
+<link rel="stylesheet" href="{% static 'web/css/carousel.css' %}" />
+{% endblock %}
+{% block content %}
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  {% if error_msg %}<div class= "text-center"> {{ error_msg }} </div>
+  {% else %}
+  {% if request.web.user %}
+
+
+  {% else %}
+                    <div class="bs-example bs-example-standalone" data-example-id="dismissible-alert-js">
+    <div class="alert alert-danger alert-dismissible fade in" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+      <strong><h4>登录警告</h4></strong>
+      <p>查看具体参数及产品信息须登录账户方可查询。
+      <a target="_blank" href="{% url 'login'  %}"
+          >登录</a></p>
+        </div>
+  {% endif %}
+  <div class="container-fluid">
+  <table class="table table-bordered text-center">
+        <thead>
+        <tr>
+        
+        <th class= 'active text-center'>零件号</th>
+        <th class= 'text-center'>工序</th>
+        <th class= 'success text-center'>焊接内容</th>
+        <th class= 'text-center'>打点数</th>
+        <th class= 'text-center'>研磨端径</th>
+        <th class= 'info text-center'>图示</th>
+        
+        </tr>
+        </thead>
+        
+        <tr>
+
+    <tr>
+      <td class= 'active '>{{ sr.part_no }}</td>
+      <td>{{ sr.op }}</td>
+      <td class= 'success '>{{sr.m1}}{{sr.t1}}+{{sr.m2|default_if_none:""}}{{sr.t2|default_if_none:""}}+{{sr.m3|default_if_none:""}}{{sr.t3|default_if_none:""}}</td>
+      <td>{{ sr.spots }}</td>
+      <td>{{ sr.diameter|default_if_none:"" }}</td>
+      <td class= 'info ' align="center" valign="middle" >
+      {% if sr.imgs %}
+      <a target="_blank"href="{{ sr.imgs }}"><img src="{{ sr.imgs }}" style="height: 60px"></a> </td>
+      {% else %}
+      <a ><img src="/static/img/None.jpg" style="height: 60px"></a>
+      {% endif %}
+      </td>
+      
+      
+      
+      
+  </table>        
+
+</div>
+<div class= "text-center">
+<h3>查询结果<span class="label badge">{{count}}</span></h3>
+</div>
+<div class="container-fluid">
+    <table class="table table-bordered text-center">
+    <thead>
+      <tr>
+        <th class= 'text-center'>设备编号</th>
+        <th class= 'warning text-center'>系列</th>
+        <th class= 'text-center'>气压MPa</th>
+        <th class= 'success text-center'>研磨频次</th>
+      </tr>
+    </thead>
+    {% for sr in search_result %}
+    <tr>
+      <td >
+        <a target="_blank" href="#"
+          >{{ sr.equipment }}</a>
+      </td>
+      <td class = 'warning'>
+        <a href="{% url 'r_parts' tool_id=sr.id %}"
+          >B-{{ sr.serial }}</a>
+      </td>
+      <td >
+        <a>{{ sr.gauge }}</a>
+      </td>
+      <td class = 'warning'>
+        {{ sr.frequency }}</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+{% endif %}
+  </div>
+  <hr style="border-top:1px dashed #987cb9;" width="100%" color="#987cb9" size=1>
+
+  </div>
+
+
+  
+<nav style="text-align: center;" aria-label="...">
+                <ul class="pagination" style="margin-top: 0px">
+                    {{ page_html|safe }}
+                </ul>
+            </nav>
+</div>
+{% endblock %}
+
+{% block js %}
+
+
+{% endblock %}

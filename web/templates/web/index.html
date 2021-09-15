@@ -31,12 +31,12 @@
     {% if banner.is_active %}
       <div class="item active">
       <a href="{{banner.link_url}}" target="_blank" title="{{banner.title}}" >
-      <img src="{{banner.cover}}" alt="{{banner.title}}" class="img-responsive"></a>
+      <img src="{{banner.cover}}" alt="{{banner.title}}" class="img-responsive center-block"></a>
       </div>
     {% else %}
       <div class="item">
       <a href="{{banner.link_url}}" target="_blank" title="{{banner.title}}" >
-      <img src="{{banner.cover}}" alt="{{banner.title}}" class="img-responsive"></a>
+      <img src="{{banner.cover}}" alt="{{banner.title}}" class="img-responsive center-block"></a>
       </div>
     {% endif %}
     {% endfor %}
@@ -53,9 +53,9 @@
   <!-- banner 结束 -->
 
 
-
-<div class="bs-example" data-example-id="contextual-panels" style="
-    margin-top: 20px" >
+ <!-- 模具搜索 -->
+<div class="bs-example container-fluid" data-example-id="contextual-panels" style="
+    margin-top: 0px" >
 
     <div class="panel panel-primary">
       <div class="panel-heading"><i class="fa fa-search" aria-hidden="true"></i>
@@ -74,16 +74,21 @@
       <div class="input-group-addon">部品番号:</div>
       <input type="text" class="form-control" name="local_part_no" placeholder="分件号">
       </div>
-  <button type="submit" formaction="search/" class="btn btn-primary ">查询</button>
+  
 
 </div>
+<button type="submit" formaction="search/" class="btn btn-primary pull-right">查询</button>
 </form>
 </div>
     </div>
         
       </div>
     </div>
-    <div class="panel panel-success">
+
+ <!-- 参数查询 -->
+<div class="bs-example container-fluid" data-example-id="contextual-panels" style="
+    margin-top: 0px" >
+    <div class="panel panel-success ">
       <div class="panel-heading">
         <i class="glyphicon glyphicon-road" aria-hidden="true"></i>  参数查询
       </div>
@@ -99,7 +104,9 @@
       <div class="input-group-addon">部品番号:</div>
       <input type="text" class="form-control" name="part_no" placeholder="分件号">
       </div>
-      <button type="submit" formaction="wsearch/" class="btn btn-success" >查询</button>
+      
+      </div>
+      <button type="submit" formaction="wsearch/" class="btn btn-success pull-right" >查询</button>
   </form>
   </div>
 </div>
@@ -107,6 +114,9 @@
     </div>
   </div>
 
+<!-- 标准件 -->
+<div class="bs-example container-fluid" data-example-id="contextual-panels" style="
+    margin-top: 0px" >
     <div class="panel panel-info">
       <div class="panel-heading">
         <i class="fa fa-list-alt" aria-hidden="true"></i>  标准件
@@ -131,7 +141,8 @@
       <div class="input-group-addon">W</div>
       <input type="text" class="form-control" name="W">
       </div>
-  <button type="submit" formaction="search3" class="btn btn-info" >查询</button>
+      </div>
+  <button type="submit" formaction="search3" class="btn btn-info pull-right" >查询</button>
 </form>
       </div>
     </div>

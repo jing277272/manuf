@@ -138,7 +138,7 @@ class SpecialParts(models.Model):
 
     local = models.CharField(max_length=20, 
                              null=False, verbose_name="货位编号")
-    model = models.CharField(max_length=40, 
+    model = models.CharField(max_length=20, 
                              null=False, verbose_name="规格型号")
     quantity = models.PositiveIntegerField(
         null=True, default=1, verbose_name="在库数量")

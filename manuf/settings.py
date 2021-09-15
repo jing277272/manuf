@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'app01.apps.App01Config',
     'web.apps.WebConfig',
     'mould.apps.MouldConfig',
+    'testing',
     'welding.apps.WeldingConfig',
     'xadmin',
     'crispy_forms',
@@ -181,7 +182,8 @@ WHITE_REGEX_URL_LIST = [
     '/',
     '/image/repair/',
     '/search/',
-    '/search3/',
+    '/wsearch/',
+    '/wsearch/r/*',
 
 ]
 

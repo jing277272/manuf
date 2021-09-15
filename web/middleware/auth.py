@@ -1,5 +1,5 @@
 import datetime
-
+import re
 from django.shortcuts import redirect
 from django.utils.deprecation import MiddlewareMixin
 from django.conf import settings
@@ -31,8 +31,20 @@ class AuthMiddleWare(MiddlewareMixin):
         #1. 获取当用户访问的URL
         #2. 检查URL是否在白名单中，如果再则可以继续向后访问，如果不在则进行判断是否已登录
         
-        if request.path_info in settings.WHITE_REGEX_URL_LIST:
-            return
+        #if request.path_info in settings.WHITE_REGEX_URL_LIST:
+        #    return
+        
+        # 设置白名单放行
+        for i in settings.WHITE_REGEX_URL_LIST:
+            # 请求的路径能够和i匹配
+            # # 匹配不到返回None
+            print(request.path)
+            ret = re.search(i,request.path)
+            if ret:
+                print(ret)
+                return None
+
+
 
         # 检查用户是否已登录，已登录继续往后走；未登录则返回登录页面。
         if not request.web.user:

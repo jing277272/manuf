@@ -1,0 +1,99 @@
+{% extends 'layout/basic.html' %} {% load static %} {% block title %} 首页 
+{% endblock %} {% block css %}
+<link
+  rel="stylesheet"
+  href="{% static 'web/plugin/bootstrap/css/bootstrap.css' %}"
+/>
+<link rel="stylesheet" href="{% static 'web/css/carousel.css' %}" />
+
+{% endblock %} {% block content %}
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+  {% if error_msg %}<div class= "text-center"> {{ error_msg }} </div>
+  {% else %}
+  {% if request.web.user %}
+
+
+  {% else %}
+                    <div class="bs-example bs-example-standalone" data-example-id="dismissible-alert-js">
+    <div class="alert alert-danger alert-dismissible fade in" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+      <strong><h4>登录警告</h4></strong>
+      <p>查看具体参数及产品信息须登录账户方可查询。
+      <a target="_blank" href="{% url 'login'  %}"
+          >登录</a></p>
+        </div>
+  {% endif %}
+          <div class="container-fluid">
+<table class="table table-bordered text-center">
+        <thead>
+        <tr>
+        
+        <th class= 'active text-center'>零件号</th>
+        <th class= 'text-center'>工序</th>
+        <th class= 'success text-center'>焊接内容</th>
+        <th class= 'text-center'>打点数</th>
+        <th class= 'info text-center'>图示</th>
+        <th class= 'text-center'>焊接设备</th>
+        </tr>
+        </thead>
+        {% for ps in part_result %}
+        <tr>
+      <td class= 'active '>{{ ps.part_no }}</td>
+      <td>{{ ps.op }}</td>
+      <td class= 'success'>{{ps.m1}}{{sr.t1}}+{{ps.m2}}{{ps.t2}}+{{ps.m3}}{{ps.t3}}</td>
+      <td>{{ ps.spots }}</td>
+      <td class= 'info' align="center" valign="middle" >
+      <a target="_blank"href="{{ ps.imgs }}"><img src="{{ ps.imgs }}" style="height: 60px"></a></td>
+      <a href="{% url 'wsearch/r/' recipe_id=ps.id %}">设备</a>
+      {% endfor %}
+      
+</div>
+
+</table>
+
+
+<div class= "text-center">
+<h3>查询结果<span class="label badge">{{count}}</span></h3>
+</div>
+<div class="container-fluid">
+    <table class="table table-bordered text-center">
+    <thead>
+      <tr>
+        <th class= 'text-center'>设备编号</th>
+        <th class= 'warning text-center'>系列</th>
+      </tr>
+    </thead>
+    {% for sr in search_result %}
+    <tr>
+      
+           
+      <td >
+        <a target="_blank" href="#"
+          >{{ sr.equipment }}</a>
+      </td>
+      <td class = 'warning'>
+        <a href="{% url 'r_parts' tool_id=sr.id %}"
+          >{{ sr.serial }}</a>
+      </td>
+    </tr>
+
+    {% endfor %}
+
+
+  </table>
+
+  </div>
+  <hr style="border-top:1px dashed #987cb9;" width="100%" color="#987cb9" size=1>
+
+  </div>
+</div >
+  {% endif %}
+<nav style="text-align: center;" aria-label="...">
+                <ul class="pagination" style="margin-top: 0px">
+                    {{ page_html|safe }}
+                </ul>
+            </nav>
+</div>
+
+{% endblock %}
