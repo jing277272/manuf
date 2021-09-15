@@ -47,7 +47,7 @@
     {% for sr in eq %}
     <tr>
       <td class= 'active '>{{ sr.line }}</td>
-      <td><a href="{% url 'wsearch_p' para=sr.id %}">{{ sr.equipment }}</td>
+      <td><a href="{% url 'wsearch_p'  %}">{{ sr.equipment }}</td>
       <td class= 'success '>{{sr.get_etype_display|default_if_none:""}}</td>
       <td>{{ sr.eq_model|default_if_none:"" }}</td>
       
